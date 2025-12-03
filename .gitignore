@@ -1,0 +1,40 @@
+# Model files (large binaries)
+*.safetensors
+*.pt
+*.pth
+*.bin
+*.onnx
+*.h5
+
+# Checkpoint directories
+checkpoint-*/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
