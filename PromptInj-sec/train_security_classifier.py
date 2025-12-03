@@ -125,13 +125,13 @@ def fine_tune_deberta(train_dataset, val_dataset):
     tokenized_train = tokenized_train.remove_columns(list(LABEL_MAP.values()) + ["text"])
     tokenized_val = tokenized_val.remove_columns(list(LABEL_MAP.values()) + ["text"])
 
-    # Define Training Arguments (CPU training for DeBERTa v3 base)
+    # Define Training Arguments (GPU training - works with AMD ROCm or NVIDIA CUDA)
     training_args = TrainingArguments(
         output_dir="./deberta_pi_classifier",
         num_train_epochs=3,                     # Number of epochs to train
-        per_device_train_batch_size=8,          # Batch size for CPU
-        per_device_eval_batch_size=8,           # Batch size for evaluation
-        gradient_accumulation_steps=2,          # Effective batch = 16
+        per_device_train_batch_size=16,         # Batch size for GPU
+        per_device_eval_batch_size=16,          # Batch size for evaluation
+        gradient_accumulation_steps=1,          # No accumulation needed with larger batch
         warmup_steps=200,                       # Warmup steps
         weight_decay=0.01,                      # Strength of weight decay
         logging_dir='./logs',                   # Directory for storing logs
@@ -140,9 +140,8 @@ def fine_tune_deberta(train_dataset, val_dataset):
         save_strategy="epoch",                  # Save checkpoint at the end of each epoch
         load_best_model_at_end=True,            # Load the best model found during training
         metric_for_best_model="f1_macro",       # Use F1-macro to select the best model
-        fp16=False,                             # CPU doesn't use fp16
-        use_cpu=True,                           # Force CPU training (avoids MPS memory issues)
-        dataloader_pin_memory=False,            # Not needed for CPU
+        fp16=True,                              # Use mixed precision for faster training
+        dataloader_pin_memory=True,             # Faster data loading with GPU
     )
 
     # Define a custom Trainer for Multi-Label Loss (BCEWithLogitsLoss)
