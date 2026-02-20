@@ -27,7 +27,7 @@ from scipy.special import expit
 from tqdm import tqdm
 
 # --- Configuration ---
-MODEL_PATH = "./final_deberta_classifier"
+MODEL_PATH = "./deberta_pi_classifier/checkpoint-390"  # Best checkpoint from training
 THRESHOLD = 0.5
 
 
