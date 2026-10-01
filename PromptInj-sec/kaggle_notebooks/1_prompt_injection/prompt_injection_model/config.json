@@ -3,23 +3,21 @@
     "DebertaV2ForSequenceClassification"
   ],
   "attention_probs_dropout_prob": 0.1,
-  "bos_token_id": 1,
+  "bos_token_id": null,
   "dtype": "float32",
-  "eos_token_id": 2,
+  "eos_token_id": null,
   "hidden_act": "gelu",
   "hidden_dropout_prob": 0.1,
   "hidden_size": 768,
   "id2label": {
-    "0": "LABEL_0",
-    "1": "LABEL_1",
-    "2": "LABEL_2"
+    "0": "SAFE",
+    "1": "INJECTION"
   },
   "initializer_range": 0.02,
   "intermediate_size": 3072,
   "label2id": {
-    "LABEL_0": 0,
-    "LABEL_1": 1,
-    "LABEL_2": 2
+    "INJECTION": 1,
+    "SAFE": 0
   },
   "layer_norm_eps": 1e-07,
   "legacy": true,
@@ -41,7 +39,9 @@
   "position_buckets": 256,
   "relative_attention": true,
   "share_att_key": true,
-  "transformers_version": "4.57.1",
+  "tie_word_embeddings": true,
+  "transformers_version": "5.2.0",
   "type_vocab_size": 0,
+  "use_cache": false,
   "vocab_size": 128100
 }
